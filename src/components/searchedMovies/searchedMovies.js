@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectMovies } from '../../store/movies/movies.selector';
 const SearchedMovies = () => {
     const { movies } = useSelector(selectMovies);
-    console.log(movies.Search)
+    console.log(movies)
     const HandleNominate = (e, movie) => {
         movies = movies.filter((val) => val.imdbID !== movie.imdbID)
     }
@@ -13,18 +13,20 @@ const SearchedMovies = () => {
     return (
         <Grid 
             container 
-            spacing={1}
-            xs={8}
-            
+            rowSpacing={1}
+            columnSpacing={0.5}
+            xs={6}
             sx={{ m: 1}}
+           
             >
             {
-                movies.hasOwnProperty('Search') ?
-                    movies.Search.map((movie) => {
+                movies.length !== 0 ?
+                    movies.map((movie, ind) => {
                         return (
-                            <Grid key={movie.imdbID} spacing={3} item style={{ width: '10%'}} >
+                            
+                            <Grid key={movie.imdbID} xs={2} justifyContent='space-evenly' item >
                                 <div onClick={(e) => HandleNominate(e,movie)}>
-                                    <MovieCard  {...movie} />
+                                    <MovieCard {...movie} />
                                 </div>
                             </Grid>
                         )

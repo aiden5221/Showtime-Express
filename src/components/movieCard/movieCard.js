@@ -11,14 +11,15 @@ const MovieCard = (movie) => {
                         component='img'
                         image={Poster}
                         alt={Title}
+                        style={{width: 'auto', height: '25vh'}}
                     />
                     <CardContent>
-                    <Typography gutterBottom variant="overline" noWrap component="div">
+                    <Typography gutterBottom variant="body2" noWrap component="div">
                         {Title}
                     </Typography>
-                    <Typography gutterBottom variant="body2" color='text.secondary'>
-                        Year:{Year}<br/>
-                        Type:{Type}
+                    <Typography gutterBottom variant="caption" noWrap color='text.secondary'>
+                        {Year}<br/>
+                        {Type}
                     </Typography>
                     </CardContent>
                 </CardActionArea>

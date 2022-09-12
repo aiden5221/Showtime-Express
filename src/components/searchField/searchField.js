@@ -21,14 +21,14 @@ const SearchField = () => {
     const onTextChange = async (e) => {
         const { name, value } = e.target;
         setFormFields({ ...formFields, [name]: value});
+
         if(e.key == 'Enter' && formFields.title){
-            console.log('fetching')
+            // fetch movies and filter out movies with no image
             let searchedMovies = await fetchMovies(formFields)
+            console.log(searchedMovies)
+            searchedMovies.filter((movie) => movie.poster !== 'N/A')
             dispatch(setMovies(searchedMovies))
         }
-        console.log(`Form fields: ${formFields.movie}`)
-        console.log(`Target: ${name}, value: ${value}`)
-        
     }
 
     return(
