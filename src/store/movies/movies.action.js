@@ -7,3 +7,11 @@ export const setMoviesSuccess = (movies) =>
 export const setMoviesStart = () =>
     createAction(MOVIES_ACTION_TYPES.SET_MOVIES_START, true)
 
+export const setMoviesFailure = (Error) =>
+    createAction(MOVIES_ACTION_TYPES.SET_MOVIES_FAILURE, Error)
+
+export const setTotalPages = (totalPages) =>
+    createAction(MOVIES_ACTION_TYPES.SET_TOTAL_PAGES, totalPages)
+
+export const setCurrentPage = (page) =>
+    createAction(MOVIES_ACTION_TYPES.SET_CURRENT_PAGE, page)

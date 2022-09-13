@@ -1,18 +1,19 @@
-import { Button, MenuItem, Select, TextField } from '@mui/material';
-import { useState } from 'react';
+import { MenuItem, Select, TextField } from '@mui/material';
+import { useEffect,useState } from 'react';
 import { Box } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import './searchField.styles.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { setMovies } from '../../store/movies/movies.action';
 import { fetchMovies } from '../../utils/omdb/movies.utils';
 import { LoadingButton } from '@mui/lab';
-import { selectIsLoading } from '../../store/movies/movies.selector';
-import { setMoviesStart, setMoviesSuccess } from '../../store/movies/movies.action';
+import { selectIsLoading, selectCurrentPage } from '../../store/movies/movies.selector';
+import { setMoviesStart, setMoviesSuccess, setMoviesFailure, setTotalPages } from '../../store/movies/movies.action';
+
 const defaultFormFields = {
     title: '',
     type: '',
     year: 0,
+    page: 1,
 }
 
 const SearchField = () => {
@@ -20,12 +21,29 @@ const SearchField = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const dispatch = useDispatch();
     var isLoading = useSelector(selectIsLoading);
+    var currentPage = useSelector(selectCurrentPage);
 
+    useEffect(() => {
+        setFormFields({ ...formFields, page:currentPage})
+        
+    }, [currentPage])
+
+    // setup selector for getting page number from pagination and set it to page value
     const getMovies = async () => {
+        
+        if(!formFields.title) return
+        
         dispatch(setMoviesStart())
-        let searchedMovies = await fetchMovies(formFields)
-        console.log(searchedMovies)
-        dispatch(setMoviesSuccess(searchedMovies))
+        
+        const { movies, totalPages, Error = null } = await fetchMovies(formFields)
+        
+        if(Error){
+            dispatch(setMoviesFailure(Error))
+            return Error;
+        };
+
+        dispatch(setTotalPages(totalPages))
+        dispatch(setMoviesSuccess(movies))
     }
 
     const onTextChange = async (e) => {
@@ -33,7 +51,7 @@ const SearchField = () => {
         setFormFields({ ...formFields, [name]: value});
 
         if(e.key == 'Enter' && formFields.title){
-            // fetch movies and filter out movies with no image
+          
             await getMovies();
         }
     }

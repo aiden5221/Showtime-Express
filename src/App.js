@@ -1,4 +1,6 @@
+
 import './App.css';
+import PaginationComponent from './components/pagination/pagination';
 import SearchedMovies from './components/searchedMovies/searchedMovies';
 import SearchField from './components/searchField/searchField';
 const App = () => {
@@ -7,6 +9,7 @@ const App = () => {
     <div>
       <SearchField />
       <SearchedMovies/>
+      <PaginationComponent/>
     </div>
   );
 }
