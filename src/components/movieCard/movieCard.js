@@ -11,7 +11,7 @@ const MovieCard = (movie) => {
                         component='img'
                         image={Poster}
                         alt={Title}
-                        style={{width: 'auto', height: '25vh'}}
+                        style={{maxWidth:'100%',  height:'25vh'}}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="body2" noWrap component="div">

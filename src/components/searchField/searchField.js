@@ -1,11 +1,14 @@
-import { MenuItem, Select, TextField } from '@mui/material';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Box } from '@mui/system';
+import SearchIcon from '@mui/icons-material/Search';
 import './searchField.styles.scss'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMovies } from '../../store/movies/movies.action';
 import { fetchMovies } from '../../utils/omdb/movies.utils';
-
+import { LoadingButton } from '@mui/lab';
+import { selectIsLoading } from '../../store/movies/movies.selector';
+import { setMoviesStart, setMoviesSuccess } from '../../store/movies/movies.action';
 const defaultFormFields = {
     title: '',
     type: '',
@@ -16,7 +19,14 @@ const SearchField = () => {
     const CATEGORIES = ['Movie', 'Series', 'Episode', 'Game', 'Any']
     const [formFields, setFormFields] = useState(defaultFormFields)
     const dispatch = useDispatch();
+    var isLoading = useSelector(selectIsLoading);
 
+    const getMovies = async () => {
+        dispatch(setMoviesStart())
+        let searchedMovies = await fetchMovies(formFields)
+        console.log(searchedMovies)
+        dispatch(setMoviesSuccess(searchedMovies))
+    }
 
     const onTextChange = async (e) => {
         const { name, value } = e.target;
@@ -24,10 +34,7 @@ const SearchField = () => {
 
         if(e.key == 'Enter' && formFields.title){
             // fetch movies and filter out movies with no image
-            let searchedMovies = await fetchMovies(formFields)
-            console.log(searchedMovies)
-            searchedMovies.filter((movie) => movie.poster !== 'N/A')
-            dispatch(setMovies(searchedMovies))
+            await getMovies();
         }
     }
 
@@ -66,10 +73,19 @@ const SearchField = () => {
                     label='Year'
                     variant="filled"
                     size="medium"
-                    sx={{ flexShrink: 2 }}
+                    sx={{ flexShrink: 1}}
                     onChange={onTextChange}
                     name='year'
                 />
+                <LoadingButton
+                    endIcon={<SearchIcon/>}
+                    loading={isLoading}
+                    sx={{ flexShrink: 0.5 }}
+                    onClick={getMovies}
+                    loadingPosition="end"
+                    variant="contained"
+                >Search</LoadingButton>
+              
                 </Box>
         </div>
     );
