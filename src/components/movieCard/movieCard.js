@@ -1,5 +1,6 @@
 import { Typography, Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
 import './movieCard.styles.scss'
+import noImage from '../../assets/noimage-placeholder.svg'
 const MovieCard = (movie) => {
     const { Title, Year, Type, Poster } = movie;
     
@@ -9,9 +10,9 @@ const MovieCard = (movie) => {
                 <CardActionArea  >
                     <CardMedia 
                         component='img'
-                        image={Poster}
+                        image={Poster == 'N/A' ? noImage : Poster}
                         alt={Title}
-                        style={{maxWidth:'100%',  height:'25vh'}}
+                        style={{ maxWidth:'100%',  maxHeight:'100%', height:'25vh' }}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="body2" noWrap component="div">

@@ -4,10 +4,11 @@ import { Box } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import './searchField.styles.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovies } from '../../utils/omdb/movies.utils';
 import { LoadingButton } from '@mui/lab';
-import { selectIsLoading, selectCurrentPage } from '../../store/movies/movies.selector';
-import { setMoviesStart, setMoviesSuccess, setMoviesFailure, setTotalPages } from '../../store/movies/movies.action';
+import { selectCurrentPage } from '../../store/options/options.selector';
+import { selectIsLoading } from '../../store/movies/movies.selector';
+import { setMoviesAsync } from '../../store/movies/movies.action';
+import { setOptions } from '../../store/options/options.action';
 
 const defaultFormFields = {
     title: '',
@@ -21,29 +22,14 @@ const SearchField = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const dispatch = useDispatch();
     var isLoading = useSelector(selectIsLoading);
-    var currentPage = useSelector(selectCurrentPage);
-
-    useEffect(() => {
-        setFormFields({ ...formFields, page:currentPage})
-        
-    }, [currentPage])
 
     // setup selector for getting page number from pagination and set it to page value
-    const getMovies = async () => {
-        
+    const getMovies = () => {
         if(!formFields.title) return
+        console.log(formFields)
+        dispatch(setOptions(formFields))
+        dispatch(setMoviesAsync(formFields))
         
-        dispatch(setMoviesStart())
-        
-        const { movies, totalPages, Error = null } = await fetchMovies(formFields)
-        
-        if(Error){
-            dispatch(setMoviesFailure(Error))
-            return Error;
-        };
-
-        dispatch(setTotalPages(totalPages))
-        dispatch(setMoviesSuccess(movies))
     }
 
     const onTextChange = async (e) => {
@@ -51,8 +37,7 @@ const SearchField = () => {
         setFormFields({ ...formFields, [name]: value});
 
         if(e.key == 'Enter' && formFields.title){
-          
-            await getMovies();
+            getMovies();
         }
     }
 

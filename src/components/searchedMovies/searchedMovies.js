@@ -4,12 +4,12 @@ import './searchedMovies.styles.scss'
 import { useSelector } from 'react-redux';
 import { selectMovies } from '../../store/movies/movies.selector';
 const SearchedMovies = () => {
-    const { movies={} } = useSelector(selectMovies);
-    
+    const { movies = [] } = useSelector(selectMovies);
+    console.log(movies)
     const HandleNominate = (e, movie) => {
         movies = movies.filter((val) => val.imdbID !== movie.imdbID)
     }
-
+ 
     return (
         <Grid 
             container 
@@ -22,10 +22,11 @@ const SearchedMovies = () => {
             >
             {
                 movies.length !== 0 ?
-                    movies.map((movie, ind) => {
+                    movies.map((movie) => {
+                        
                         return (
                             
-                            <Grid key={movie.imdbID} xs={6} md={3} lg ={2} item >
+                            <Grid key={movie.imdbID} xs={6} md={3} lg ={1.2} item >
                                 <div onClick={(e) => HandleNominate(e,movie)}>
                                     <MovieCard {...movie} />
                                 </div>

@@ -1,14 +1,22 @@
 import { Box, Pagination } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { selectTotalPages } from "../../store/movies/movies.selector";
-import { setCurrentPage } from "../../store/movies/movies.action";
+import { selectCurrentPage, selectTotalPages } from "../../store/movies/movies.selector";
+import { setMoviesAsync } from "../../store/movies/movies.action";
+import { selectOptions } from "../../store/options/options.selector";
+import { setOptions } from "../../store/options/options.action";
 
 const PaginationComponent = () => {
     const dispatch = useDispatch();
-    const totalPages = useSelector(selectTotalPages);  
-    
-    const changePage = (page) => {
-        dispatch(setCurrentPage(page))
+    var currentOptions = useSelector(selectOptions);
+    const totalPages = useSelector(selectTotalPages);
+    const currentPage = useSelector(selectCurrentPage)
+
+
+    const changePage = () => {    
+        currentOptions.page = currentPage
+        console.log(currentPage)
+        dispatch(setOptions(currentOptions))
+        dispatch(setMoviesAsync(currentOptions))
     }
 
     return(
@@ -20,7 +28,7 @@ const PaginationComponent = () => {
                 m: "20px 0px"
             }}
             >
-            <Pagination count={totalPages} showFirstButton showLastButton onChange={(e,page) => changePage(page)}/>
+            <Pagination count={totalPages} showFirstButton showLastButton onChange={(e,page) => changePage()}/>
         </Box>
     )
 }
