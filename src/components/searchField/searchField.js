@@ -46,7 +46,7 @@ const SearchField = () => {
             onKeyDown={onTextChange}
             tabIndex='0' 
             className='searchfield-container'
-            sx={{borderRadius: '16px', bgcolor:'red'}}>
+            >
                 <Typography 
                     align='center'
                     variant='h3'
