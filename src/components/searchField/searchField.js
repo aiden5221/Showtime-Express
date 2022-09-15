@@ -1,14 +1,13 @@
 import { MenuItem, Select, TextField } from '@mui/material';
-import { useEffect,useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import './searchField.styles.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingButton } from '@mui/lab';
-import { selectCurrentPage } from '../../store/options/options.selector';
-import { selectIsLoading } from '../../store/movies/movies.selector';
-import { setMoviesAsync } from '../../store/movies/movies.action';
-import { setOptions } from '../../store/options/options.action';
+import { selectIsLoading, selectShowNominated } from '../../store/movies/movies.selector';
+import { setMoviesAsync, setShowNominated } from '../../store/movies/movies.action';
+import { Button, Typography } from '../../../node_modules/@mui/material/index';
 
 const defaultFormFields = {
     title: '',
@@ -22,15 +21,16 @@ const SearchField = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const dispatch = useDispatch();
     var isLoading = useSelector(selectIsLoading);
+    var showNominated = useSelector(selectShowNominated);
 
     // setup selector for getting page number from pagination and set it to page value
     const getMovies = () => {
         if(!formFields.title) return
         console.log(formFields)
-        dispatch(setOptions(formFields))
         dispatch(setMoviesAsync(formFields))
         
     }
+
 
     const onTextChange = async (e) => {
         const { name, value } = e.target;
@@ -45,7 +45,14 @@ const SearchField = () => {
         <div 
             onKeyDown={onTextChange}
             tabIndex='0' 
-            className='searchfield-container'>
+            className='searchfield-container'
+            sx={{borderRadius: '16px', bgcolor:'red'}}>
+                <Typography 
+                    align='center'
+                    variant='h3'
+                >
+                    Movie Search
+                </Typography>
                 <Box sx={{ display: 'flex', p: 1, borderRadius: 1, bgcolor: 'background.paper'}}>
                 <TextField 
                     id="outlined-basic"  
@@ -57,7 +64,7 @@ const SearchField = () => {
                 />
                 <Select
                     labelId='label-type'
-                    sx={{ flexShrink: 0, minWidth:'20%' }}
+                    sx={{ flexShrink: 0, minWidth:'20%', ml:0.5 }}
                     autoWidth
                     defaultValue='none'
                     onChange={onTextChange}
@@ -76,20 +83,23 @@ const SearchField = () => {
                     label='Year'
                     variant="filled"
                     size="medium"
-                    sx={{ flexShrink: 1}}
+                    sx={{ flexShrink: 1, ml:0.5}}
                     onChange={onTextChange}
                     name='year'
                 />
                 <LoadingButton
                     endIcon={<SearchIcon/>}
                     loading={isLoading}
-                    sx={{ flexShrink: 0.5 }}
+                    sx={{ flexShrink: 0.5, ml: 2 }}
                     onClick={getMovies}
                     loadingPosition="end"
                     variant="contained"
                 >Search</LoadingButton>
               
                 </Box>
+                <Button sx={{ flexShrink: 0.5, ml: 2 }} onClick={() => dispatch(setShowNominated(!showNominated))}>
+                    Show Nominated Movies
+                </Button>
         </div>
     );
 }

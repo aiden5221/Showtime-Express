@@ -1,7 +1,11 @@
 .searchfield-container {
     width: 50%;
     margin: 3% 25% 0 25%;
-    
+    border-radius: 12px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(138, 199, 244,0.4);
+    padding: 1em;
     .searchfield {
         float: left;
     }

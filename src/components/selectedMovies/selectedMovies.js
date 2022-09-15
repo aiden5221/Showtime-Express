@@ -1,11 +1,72 @@
 import { Grid } from "@mui/material";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Modal, Typography } from "../../../node_modules/@mui/material/index";
+import { setNominatedMovie, setShowNominated } from "../../store/movies/movies.action";
+import { selectMovies, selectNominatedMovies, selectShowNominated } from "../../store/movies/movies.selector";
+import MovieCard from "../movieCard/movieCard";
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 const SelectedMovies = () => {
-    const [sMovies, setSMovies] = useState([])
+    const nominatedMovies = useSelector(selectNominatedMovies);
+    const showNominated = useSelector(selectShowNominated);
+    const movies = useSelector(selectMovies);
+    const dispatch = useDispatch();
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        minWidth: '75%',
+        minHeight: '50%',
+        bgcolor: 'rgba(138, 172, 244, 0.9)',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+        borderRadius: '16px',
+    };
+
+
     return(
-        <Grid container>
+        <Modal
+        open={showNominated}
+        onClose={() => dispatch(setShowNominated(false))}
+        >
+            <Grid sx={style}>
+                <Typography align='center' variant='h4'>
+                    Nominated Movies!
+                </Typography>
+                <Grid 
+            container 
+            direction='row'
+            alignItems='center'
+            justifyContent='center'
+            sx={{ p:5}}
+            rowSpacing={2}
+            columnSpacing={2}
+            >
+                
+            {
+            nominatedMovies.length != 0 ? 
+                nominatedMovies.map((id) => {
+                    var currentMovie = movies.movies.find((movie) => movie.imdbID == id);
+                    return(<Grid on key={id} xs={6} md={3} lg ={2.4} item >
+                        
+                                <div onClick={() => { dispatch(setNominatedMovie(id))}} >
+                                    <MovieCard {...currentMovie} />
+                                </div>
+                    </Grid>)
+                })
+                 : <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    
+                }}><SentimentVeryDissatisfiedIcon sx={{m:2 }}/><span>No nominated movies..</span></div>
+            }
+            
             
         </Grid>
+            </Grid>
+        </Modal>
     )
 
 }
