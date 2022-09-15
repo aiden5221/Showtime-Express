@@ -1,7 +1,6 @@
 import { Box, LinearProgress } from "../../../node_modules/@mui/material/index";
 
 const Placeholder = ({ isLoading }) => {
-    
     return(
         <div>
             {

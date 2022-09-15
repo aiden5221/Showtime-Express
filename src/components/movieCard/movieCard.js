@@ -1,11 +1,9 @@
-import { Typography, Card, CardActionArea, CardContent, CardMedia, Button  } from '@mui/material';
+import { Typography, Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import './movieCard.styles.scss'
 import noImage from '../../assets/noimage-placeholder.svg'
 import { useSelector } from 'react-redux';
 import { selectNominatedMovies } from '../../store/movies/movies.selector';
-import { useEffect } from 'react';
 
 const MovieCard = (movie) => {
     const { Title, Year, Type, Poster, imdbID } = movie;

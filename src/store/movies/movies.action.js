@@ -28,7 +28,6 @@ export const setMoviesAsync = (options) => async (dispatch) => {
     dispatch(setMoviesStart());
     try {
         const movies = await fetchMovies(options);
-        console.log(movies)
         if(movies.Error) throw(movies.Error);
         dispatch(setCurrentPage(1));
         dispatch(setMoviesSuccess(movies));

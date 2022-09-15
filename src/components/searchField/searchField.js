@@ -26,9 +26,7 @@ const SearchField = () => {
     // setup selector for getting page number from pagination and set it to page value
     const getMovies = () => {
         if(!formFields.title) return
-        console.log(formFields)
         dispatch(setMoviesAsync(formFields))
-        
     }
 
 
@@ -36,7 +34,7 @@ const SearchField = () => {
         const { name, value } = e.target;
         setFormFields({ ...formFields, [name]: value});
 
-        if(e.key == 'Enter' && formFields.title){
+        if(e.key === 'Enter' && formFields.title){
             getMovies();
         }
     }

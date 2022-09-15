@@ -10,20 +10,17 @@ export const fetchMovies = async (options, filteredMovies = []) => {
                             .then((res) => res.json())
                             .then((data) => { return(data) })
                             .catch((err) => { return(err) });
-    
-    console.log(page)
-    if(Error || Response == 'False') return Error;
+
+    if(Error || Response === 'False') return Error;
 
     // remove movies with no image
     // filteredMovies.push(...Search.filter((movie) => movie.Poster !== 'N/A'));
     filteredMovies.push(...Search)
 
-    if((Search.length == 10) && ((filteredMovies.length) < totalResults)) {
+    if((Search.length === 10) && ((filteredMovies.length) < totalResults)) {
         options.page = options.page + 1 || 1
         return await fetchMovies(options, filteredMovies)
     }
-
-    var newPage = options.page;
 
     return {
         movies: filteredMovies,

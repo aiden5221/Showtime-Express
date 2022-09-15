@@ -5,6 +5,7 @@ import { setNominatedMovie, setShowNominated } from "../../store/movies/movies.a
 import { selectMovies, selectNominatedMovies, selectShowNominated } from "../../store/movies/movies.selector";
 import MovieCard from "../movieCard/movieCard";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
 const SelectedMovies = () => {
     const nominatedMovies = useSelector(selectNominatedMovies);
     const showNominated = useSelector(selectShowNominated);

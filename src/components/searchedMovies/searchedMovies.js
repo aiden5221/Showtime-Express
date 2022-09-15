@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material';
 import MovieCard from '../movieCard/movieCard';
-import './searchedMovies.styles.scss'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentPage, selectMovies, selectNominatedMovies } from '../../store/movies/movies.selector';
@@ -16,24 +15,19 @@ const SearchedMovies = () => {
     const MAX_MOVIES = 30;
     const MAX_NOMINATED_MOVIES = 5;
 
-    console.log(movies)
-    console.log('CURRENT PAGE SEARCHEDMOVIES: ' + currentPage)
-
     useEffect(() => {
         selectMoviesGrid();
     }, [currentPage, movies])
 
     const selectMoviesGrid = () => {
-
-        console.log('inside select')
-        var startIndex = currentPage != 0 ? (currentPage - 1) * MAX_MOVIES : 0
-        var endIndex = currentPage != 0 ? currentPage * MAX_MOVIES : 0
+        var startIndex = currentPage !== 0 ? (currentPage - 1) * MAX_MOVIES : 0
+        var endIndex = currentPage !== 0 ? currentPage * MAX_MOVIES : 0
         setCurrentMovies(movies.slice(startIndex, endIndex));
     }
-    console.log(movies)
+
     const nominateMovie = (movie) => {
         // to limit max movies
-        if(nominatedMovies.length == MAX_NOMINATED_MOVIES && !nominatedMovies.includes(movie.imdbID)){
+        if(nominatedMovies.length === MAX_NOMINATED_MOVIES && !nominatedMovies.includes(movie.imdbID)){
             alert('Max movies!')
             return
         }

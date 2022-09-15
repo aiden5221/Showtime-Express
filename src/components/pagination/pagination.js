@@ -14,12 +14,9 @@ const PaginationComponent = () => {
         setPage(currentPage);
     }, [currentPage])
 
-    console.log('current page: ' + page)
     const changePage = (page) => {  
-        console.log('inside change page:' + page)  
         setPage(page)
         dispatch(setCurrentPage(page))
-        console.log(page)
     }
 
     return(
