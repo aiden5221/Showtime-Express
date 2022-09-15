@@ -4,7 +4,7 @@ export const fetchMovies = async (options, filteredMovies = []) => {
     var { title, type, year, page } = options;
     const MAX_RESULTS = 30;
 
-    const reqUrl = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_APIKEY}&s=${title}&y=${year ? year : ''}&type=${type && type !== 'Any' ? type : ''}&r=json&page=${page}`;
+    const reqUrl = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_APIKEY}&s=${title}&y=${year ? year : ''}&type=${type && type !== 'Any' ? type : ''}&r=json&page=${page}`;
 
     const { Search = {}, totalResults = 0, Error = "", Response  } =  await fetch(reqUrl)
                             .then((res) => res.json())
