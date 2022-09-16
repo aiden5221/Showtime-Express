@@ -17,7 +17,7 @@ const SelectedMovies = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        minWidth: '75%',
+        minWidth: '50%',
         minHeight: '50%',
         bgcolor: 'rgba(138, 172, 244, 0.9)',
         border: '2px solid #000',

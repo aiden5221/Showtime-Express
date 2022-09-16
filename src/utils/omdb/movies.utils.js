@@ -3,8 +3,8 @@ export const fetchMovies = async (options, filteredMovies = []) => {
     
     var { title, type, year, page } = options;
     const MAX_RESULTS = 30;
-
-    const reqUrl = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_APIKEY}&s=${title}&y=${year ? year : ''}&type=${type && type !== 'Any' ? type : ''}&r=json&page=${page}`;
+    console.log('current options: ' + Object.values(options))
+    const reqUrl = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_APIKEY}&s=${title}&y=${year === 0 ? '' : year}&type=${type === '' && type !== 'Any' ? type : ''}&r=json&page=${page}`;
 
     const { Search = {}, totalResults = 0, Error = "", Response  } =  await fetch(reqUrl)
                             .then((res) => res.json())

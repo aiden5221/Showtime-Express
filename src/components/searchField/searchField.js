@@ -38,31 +38,36 @@ const SearchField = () => {
             getMovies();
         }
     }
+    const style = {
+        'min-width':'40%'
+    }
 
     return(
         <div 
             onKeyDown={onTextChange}
             tabIndex='0' 
             className='searchfield-container'
+            style={style}
             >
                 <Typography 
                     align='center'
                     variant='h3'
+                    
                 >
                     Movie Search
                 </Typography>
-                <Box sx={{ display: 'flex', p: 1, borderRadius: 1, bgcolor: 'background.paper'}}>
+                <Box sx={{ display: 'flex',  minWidth: '50%',  p: 1, borderRadius: 1, bgcolor: 'background.paper'}}>
                 <TextField 
                     id="outlined-basic"  
                     className='searchfield' 
                     label='Search a movie' 
-                    sx={{ width: '100%' }}
+                    sx={{ flexShrink: 0,  minWidth: '5%', width:'60%', fontSize:'4vw',}}
                     onChange={onTextChange}
                     name='title'
                 />
                 <Select
                     labelId='label-type'
-                    sx={{ flexShrink: 0, minWidth:'20%', ml:0.5 }}
+                    sx={{ flexShrink: 0.2, ml:0.5, minWidth:'11%', fontSize:'0.5vww'}}
                     autoWidth
                     defaultValue='none'
                     onChange={onTextChange}
@@ -81,21 +86,25 @@ const SearchField = () => {
                     label='Year'
                     variant="filled"
                     size="medium"
-                    sx={{ flexShrink: 1, ml:0.5}}
+                    sx={{ flexShrink: 1, ml:0.5,  minWidth: '5%'}}
                     onChange={onTextChange}
                     name='year'
                 />
                 <LoadingButton
                     endIcon={<SearchIcon/>}
                     loading={isLoading}
-                    sx={{ flexShrink: 0.5, ml: 2 }}
+                    sx={{ flexShrink: 1.1, ml: 0.5, mr:1,  minWidth: '5%', fontSize:'0.8vw', justifyContent:'center' }}
                     onClick={getMovies}
                     loadingPosition="end"
                     variant="contained"
-                >Search</LoadingButton>
+                >
+                {
+                    isLoading ? '' : 'Search'
+                }
+                </LoadingButton>
               
                 </Box>
-                <Button sx={{ flexShrink: 0.5, ml: 2 }} onClick={() => dispatch(setShowNominated(!showNominated))}>
+                <Button sx={{ flexShrink: 1, ml: 2,  minWidth: '5%'}} onClick={() => dispatch(setShowNominated(!showNominated))}>
                     Show Nominated Movies
                 </Button>
         </div>
