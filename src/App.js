@@ -1,6 +1,7 @@
 
 import { useSelector } from 'react-redux';
 import './App.css';
+import Footer from './components/footer/footer';
 import PaginationComponent from './components/pagination/pagination';
 import Placeholder from './components/placeholder/placeholder';
 import SearchedMovies from './components/searchedMovies/searchedMovies';
@@ -21,6 +22,7 @@ const App = () => {
       }
       
       <PaginationComponent />
+      <Footer />
     </div>
   );
 }
