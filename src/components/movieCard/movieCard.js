@@ -9,7 +9,6 @@ const MovieCard = (movie) => {
     const { Title, Year, Type, Poster, imdbID } = movie;
     const nominatedMovies = useSelector(selectNominatedMovies);
 
-
     return(
         <div >
             <Card>
@@ -31,16 +30,14 @@ const MovieCard = (movie) => {
                         {Year}<br/>
                         
                     </Typography>
-                    
+
                     </CardContent>                    
                    
                     {
                         nominatedMovies.includes(imdbID) ? <RemoveIcon color='error' sx={{float:'right', p: 1}} fontSize='large' />  :  <AddIcon color='primary' sx={{float:'right', p: 1}} fontSize='large'/>
                     }
-  
-                    
+
                 </CardActionArea>
-                
             </Card>
         </div>
     )
@@ -48,13 +45,3 @@ const MovieCard = (movie) => {
 }
 
 export default MovieCard;
-
-
- // <div className='moviecard-container'>
-        //     <h3>{Title}</h3>
-        //     <span>Type:{Type}</span>
-        //     <img src={Poster}/>
-        //     <span>Year:{Year}</span>
-        //     <Button variant='outlined'>Nominate</Button>
-            
-        // </div>

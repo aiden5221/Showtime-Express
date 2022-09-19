@@ -12,21 +12,21 @@ import { Button, Typography } from '../../../node_modules/@mui/material/index';
 const defaultFormFields = {
     title: '',
     type: '',
-    year: 0,
+    year: '',
     page: 1,
 }
 
 const SearchField = () => {
-    const CATEGORIES = ['Movie', 'Series', 'Episode', 'Game', 'Any']
-    const [formFields, setFormFields] = useState(defaultFormFields)
+    const CATEGORIES = ['Movie', 'Series', 'Episode', 'Game', 'Any'];
+    const [formFields, setFormFields] = useState(defaultFormFields);
     const dispatch = useDispatch();
     var isLoading = useSelector(selectIsLoading);
     var showNominated = useSelector(selectShowNominated);
 
     // setup selector for getting page number from pagination and set it to page value
     const getMovies = () => {
-        if(!formFields.title) return
-        dispatch(setMoviesAsync(formFields))
+        if(!formFields.title) return;
+        dispatch(setMoviesAsync(formFields));
     }
 
 
@@ -70,6 +70,7 @@ const SearchField = () => {
                     sx={{ flexShrink: 0,  minWidth: '5%', width:'60%', fontSize:'4vw',}}
                     onChange={onTextChange}
                     name='title'
+                    value={formFields.title}
                 />
                 <Select
                     labelId='label-type'
@@ -78,6 +79,7 @@ const SearchField = () => {
                     defaultValue='none'
                     onChange={onTextChange}
                     name='type'
+                    value={formFields.type}
                 >
                     <MenuItem value='none' disabled>Type</MenuItem>
                     {
@@ -95,6 +97,7 @@ const SearchField = () => {
                     sx={{ flexShrink: 1, ml:0.5,  minWidth: '5%'}}
                     onChange={onTextChange}
                     name='year'
+                    value={formFields.year}
                 />
                 <LoadingButton
                     endIcon={<SearchIcon/>}
@@ -103,6 +106,7 @@ const SearchField = () => {
                     onClick={getMovies}
                     loadingPosition="end"
                     variant="contained"
+                    
                 >
                 {
                     isLoading ? '' : 'Search'

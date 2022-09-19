@@ -1,7 +1,7 @@
 
 import { useSelector } from 'react-redux';
 import './App.css';
-import Footer from './components/footer/footer';
+import Header from './components/header/header';
 import PaginationComponent from './components/pagination/pagination';
 import Placeholder from './components/placeholder/placeholder';
 import SearchedMovies from './components/searchedMovies/searchedMovies';
@@ -11,8 +11,10 @@ import { selectIsLoading, selectShowNominated } from './store/movies/movies.sele
 const App = () => {
   const isLoading = useSelector(selectIsLoading);
   const showNominated = useSelector(selectShowNominated);
+  
   return(
     <div className='main'>
+      <Header />
       <SearchField />
       {
         showNominated ? <SelectedMovies /> : null
@@ -21,8 +23,7 @@ const App = () => {
         isLoading ? <Placeholder isLoading={true}/> : <SearchedMovies/>
       }
       
-      <PaginationComponent />
-      <Footer />
+      <PaginationComponent /> 
     </div>
   );
 }

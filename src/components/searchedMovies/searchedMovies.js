@@ -18,18 +18,18 @@ const SearchedMovies = () => {
 
     useEffect(() => {
         selectMoviesGrid();
-    }, [currentPage, movies])
+    }, [currentPage])
 
     const selectMoviesGrid = () => {
-        var startIndex = currentPage !== 0 ? (currentPage - 1) * MAX_MOVIES : 0
-        var endIndex = currentPage !== 0 ? currentPage * MAX_MOVIES : 0
+        var startIndex = currentPage !== 0 ? (currentPage - 1) * MAX_MOVIES : 0;
+        var endIndex = currentPage !== 0 ? currentPage * MAX_MOVIES : 0;
         setCurrentMovies(movies.slice(startIndex, endIndex));
     }
 
     const nominateMovie = (movie) => {
         // to limit max movies
         if(nominatedMovies.length === MAX_NOMINATED_MOVIES && !nominatedMovies.includes(movie.imdbID)){
-            alert('Max movies!')
+            alert('Max movies chosen!');
             return
         }
         dispatch(setNominatedMovie(movie.imdbID));
@@ -40,7 +40,7 @@ const SearchedMovies = () => {
             direction='row'
             alignItems='center'
             justifyContent='center'
-            sx={{ p:5}}
+            sx={{ p:5, minHeight: '80%'}}
             rowSpacing={2}
             columnSpacing={2}
             >

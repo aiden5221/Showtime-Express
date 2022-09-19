@@ -1,8 +1,8 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import './footer.styles.scss';
+import './header.styles.scss';
 
-const Footer = () => {
+const Header = () => {
     const GITHUB_URL = "https://github.com/aiden5221"
     const LINKEDIN_URL = "https://www.linkedin.com/in/aidenjolleyruhn/"
 
@@ -23,4 +23,4 @@ const Footer = () => {
 }
 
 
-export default Footer;
+export default Header;

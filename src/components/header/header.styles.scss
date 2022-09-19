@@ -1,0 +1,13 @@
+.footer-icon:hover {
+    opacity: 0.5;
+}
+
+.footer-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    left: 50%;
+    top: 0%;
+    margin-left: -48%; /*half the width*/
+    margin-top: 0.5vh;
+}
