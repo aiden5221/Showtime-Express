@@ -1,6 +1,6 @@
 # Showtime Express
 
-Showtime Express is an interactive movie nomination application that allows the user to select 5 of their favorite movies queried from the OMDB API.
+Showtime Express is an interactive movie nomination application that allows the user to select 5 of their favorite movies queried from the OMDB API. Created using React, Redux and Material UI.
 
 ## Installation
 
