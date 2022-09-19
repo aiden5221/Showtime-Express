@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentPage, selectMovies, selectNominatedMovies } from '../../store/movies/movies.selector';
 import { useEffect } from 'react';
 import { setNominatedMovie } from '../../store/movies/movies.action';
+import { Typography } from '../../../node_modules/@mui/material/index';
 
 const SearchedMovies = () => {
     var { movies = [] } = useSelector(selectMovies);
@@ -54,7 +55,7 @@ const SearchedMovies = () => {
                                 </div>
                     </Grid>)
                 })
-                 : null
+                 : <Typography align='center' variant='subtitle1'>No searched movies or search results!</Typography>
             }
             
             

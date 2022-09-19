@@ -19,7 +19,7 @@ const SelectedMovies = () => {
         transform: 'translate(-50%, -50%)',
         minWidth: '50%',
         minHeight: '50%',
-        bgcolor: 'rgba(138, 172, 244, 0.9)',
+        bgcolor: 'rgba(21, 164, 203, 0.9)',
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,

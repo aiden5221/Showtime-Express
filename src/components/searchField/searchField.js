@@ -52,9 +52,15 @@ const SearchField = () => {
                 <Typography 
                     align='center'
                     variant='h3'
-                    
                 >
-                    Movie Search
+                    Showtime Express
+                </Typography>
+                <Typography 
+                    paragraph
+                    align='center'
+                    sx={{mt:2}}
+                >
+                    Search for five movies to nominate!
                 </Typography>
                 <Box sx={{ display: 'flex',  minWidth: '50%',  p: 1, borderRadius: 1, bgcolor: 'background.paper'}}>
                 <TextField 
@@ -104,7 +110,7 @@ const SearchField = () => {
                 </LoadingButton>
               
                 </Box>
-                <Button sx={{ flexShrink: 1, ml: 2,  minWidth: '5%'}} onClick={() => dispatch(setShowNominated(!showNominated))}>
+                <Button sx={{ flexShrink: 1, ml: 1,  minWidth: '5%'}} variant='outlined' onClick={() => dispatch(setShowNominated(!showNominated))}>
                     Show Nominated Movies
                 </Button>
         </div>
