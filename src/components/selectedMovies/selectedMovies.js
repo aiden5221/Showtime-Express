@@ -9,9 +9,9 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 const SelectedMovies = () => {
     const nominatedMovies = useSelector(selectNominatedMovies);
     const showNominated = useSelector(selectShowNominated);
-    const movies = useSelector(selectMovies);
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
+    console.log(nominatedMovies)
     const style = {
         position: 'absolute',
         top: '50%',
@@ -48,12 +48,12 @@ const SelectedMovies = () => {
                 
             {
             nominatedMovies.length != 0 ? 
-                nominatedMovies.map((id) => {
-                    var currentMovie = movies.movies.find((movie) => movie.imdbID == id);
-                    return(<Grid on key={id} xs={6} md={3} lg ={2.4} item >
+                nominatedMovies.map((movie) => {
+                    //var currentMovie = movies.movies.find((movie) => movie.imdbID == id);
+                    return(<Grid on key={movie.imdbID} xs={6} md={3} lg ={2.4} item >
                         
-                                <div onClick={() => { dispatch(setNominatedMovie(id))}} >
-                                    <MovieCard {...currentMovie} />
+                                <div onClick={() => { dispatch(setNominatedMovie(movie))}} >
+                                    <MovieCard {...movie} />
                                 </div>
                     </Grid>)
                 })

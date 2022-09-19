@@ -17,8 +17,8 @@ export const setTotalPages = (pages) =>
 export const setCurrentPage = (page) => 
     createAction(MOVIES_ACTION_TYPES.SET_CURRENT_PAGE, page);
 
-export const setNominatedMovie = (imdbID) =>
-    createAction(MOVIES_ACTION_TYPES.SET_NOMINATED_MOVIE, imdbID);
+export const setNominatedMovie = (movie) =>
+    createAction(MOVIES_ACTION_TYPES.SET_NOMINATED_MOVIE, movie);
 
 export const setShowNominated = (showNominated) =>
     createAction(MOVIES_ACTION_TYPES.SET_SHOW_NOMINATED, showNominated);

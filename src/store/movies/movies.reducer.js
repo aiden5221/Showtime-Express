@@ -23,7 +23,7 @@ export const moviesReducer = (state = INITIAL_STATE, action ) => {
         case MOVIES_ACTION_TYPES.SET_CURRENT_PAGE:
             return { ...state, currentPage: payload };
         case MOVIES_ACTION_TYPES.SET_NOMINATED_MOVIE:
-            return { ...state, nominatedMovies: state.nominatedMovies.includes(payload) ? state.nominatedMovies.filter(movie => movie != payload) : state.nominatedMovies.concat(payload)};
+            return { ...state, nominatedMovies: state.nominatedMovies.includes(payload) ? state.nominatedMovies.filter(movie => movie !== payload) : state.nominatedMovies.concat(payload)};
         case MOVIES_ACTION_TYPES.SET_SHOW_NOMINATED:
             return { ...state, showNominated: payload };
         default:

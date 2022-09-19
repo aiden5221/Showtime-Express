@@ -32,7 +32,8 @@ const SearchedMovies = () => {
             alert('Max movies chosen!');
             return
         }
-        dispatch(setNominatedMovie(movie.imdbID));
+
+        dispatch(setNominatedMovie(movie));
     }
     return (
         <Grid 
